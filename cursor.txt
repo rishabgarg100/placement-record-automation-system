@@ -1,0 +1,15 @@
+declare 
+cursor c1 is select rollno,name from placed;
+begin
+   for r in c1  loop
+      dbms_output.put_line(r.rollno||'placed in '||r.name); 
+   end loop;
+end;
+
+declare 
+cursor c1 is select * from company;
+begin
+   for r in c1  loop
+     dbms_output.put_line(name||foundation_year||package||interview_type||description); 
+   end loop;
+end;

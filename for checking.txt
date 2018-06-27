@@ -1,0 +1,38 @@
+select * from S;
+select table_name from user_tables;
+
+
+declare
+s1 S.sno%type:=&sno;
+sn S.sname%type:=&sname;
+ci S.city%type:=&city;
+begin
+insert into s values (s1,sn,ci);
+end;
+
+create or replace procedure company_specialisation (check in number,nm in varchar2) is
+begin
+if check=1  then 
+	declare
+	ct company_small_package.company_type%type := '&company_type';
+	begin
+	insert into company_small_package values (nm,ct);
+	end;   
+elsif check = 2 then
+	declare
+	cg company_medium_package.cgpa_cut%type := '&cgpa_cut';
+	pkg company_medium_package.package%type  := '&package';
+	begin
+	insert into company_medium_package values (nm,cg,pkg);
+	end;
+elsif check = 3 then
+	declare
+	cg company_dream_package.cgpa_cut%type := '&cgpa_cut';
+	fc company_dream_package.facility%type := '&facility';
+	begin
+	insert into company_dream_package values (nm,cg,fc);
+	end;
+else
+	dbms_output.putline('wrong input');
+end if;
+end;

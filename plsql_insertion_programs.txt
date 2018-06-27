@@ -1,0 +1,100 @@
+declare
+rno student.rollno%type := &rollno;
+sname student.name%type := '&name';
+mob student.mobile_no%type := '&mob';
+fname student.father_name%type := '&father_name';
+mname student.mother_name%type := '&mother_name';
+branch student.branch%type := '&branch';
+dob student.dob%type := '&dob';
+DUPLICATE EXCEPTION;
+PRAGMA EXCEPTION_INIT(DUPLICATE,-00001);
+begin
+insert into student values (rno,sname,mob,fname,mname,branch,dob);
+EXCEPTION
+WHEN DUPLICATE THEN
+DBMS_OUTPUT.PUT_LINE('RNO ALREADY USED');
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE(' ERROR OCCURED');
+end;
+
+set serveroutput on;
+declare
+nm company.name%type := '&name';
+fy company.foundation_year%type := &foundation_year;
+pkg1 number(3) := &package;
+itype company.interview_type%type := '&interview_type';
+inf company.description%type := '&description';
+bs company_branch_specification.branch_spec%type:= '&branch_spec';
+checkt number(2) := &specialise_company;
+ct company_small_package.company_type%type := '&company_type';
+cg company_medium_package.cgpa_cut%type := &cgpa_cut;
+fc company_dream_package.facility%type := '&facility';
+DUPLICATE EXCEPTION;
+PRAGMA EXCEPTION_INIT(DUPLICATE,-00001);
+begin
+   insert into company values (nm,fy,pkg1,itype,inf);
+   insert into company_branch_specification values (nm,bs);
+   company_specialisation(nm,checkt,ct,cg,fc);     
+EXCEPTION
+WHEN DUPLICATE THEN
+DBMS_OUTPUT.PUT_LINE('RNO ALREADY USED');
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE(' ERROR OCCURED');
+end; 
+
+
+
+set serveroutput on;
+declare
+rno student_academics.rollno%type := &rollno;
+ag1 student_academics.agpa_1%type := &agpa_1;
+ag2 student_academics.agpa_2%type := &agpa_2;
+ag3 student_academics.agpa_3%type := &agpa_3;
+cg student_academics.cgpa%type := &cgpa;
+ab student_academics_ability.ability%type:='&ability';
+ach student_academics_achievement.achievement%type:='&achievement';
+pw student_academics_projectwork.projectwork%type:='&projectwork';
+cc student_cocurricular.cocurricular_activities%type:='&cocurricular_activities';
+begin
+    
+	  insert into student_academics values (rno,ag1,ag2,ag3,cg);
+          insert into student_academics_ability values (rno,ab);          
+          insert into student_academics_achievement values (rno,ach);         
+          insert into student_academics_projectwork values (rno,pw);         
+          insert into student_cocurricular values (rno,cc);          
+    
+end;
+
+set serveroutput on;
+declare
+ano college_alumini.almunino%type:= &almunino;
+nm college_alumini.name%type:= '&name';
+pkg college_alumini.package%type:= &package;
+st college_alumini.status%type:= '&status';
+yop college_alumini.year_of_passing%type:= &year_of_passing;
+yoj college_alumini.year_of_joining_company%type:= &year_of_joining_company;
+wa college_alumini.working_address%type:= '&working_address';
+ac alumini_contact.mobile_no%type:= '&mob_no';
+begin
+   insert into college_alumini values (ano,nm,pkg,st,yop,yoj,wa);   
+   insert into alumini_contact values (ano,ac);    
+end; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

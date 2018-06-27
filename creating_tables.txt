@@ -1,0 +1,141 @@
+create table student 
+(
+rollno number(10) primary key,
+name varchar2(50),
+mobile_no varchar2 (15),
+father_name varchar2(50),
+mother_name varchar2 (50),
+branch varchar2(10),
+dob date
+);
+
+create table company 
+(
+name varchar2(50) primary key,
+foundation_year number(10),
+package number(12,3),
+interview_type varchar2(250),
+description varchar2(250)
+);
+
+create table college_alumini 
+(
+almunino number(15) primary key,
+name varchar2(50),
+package number(12,3),
+status varchar2 (20),
+year_of_passing number(10),
+year_of_joining_company number(10),
+working_address varchar2(100)
+);
+
+create table student_academics
+(
+rollno number(10) primary key,
+agpa_1 number(4,2),
+agpa_2 number(4,2),
+agpa_3 number(4,2),
+cgpa number(4,2),
+foreign key (rollno) references student(rollno) on delete cascade
+);
+
+create table apply
+(
+rollno number(10) references student(rollno) on delete cascade,
+name varchar2(50) references company(name) on delete cascade,
+primary key (rollno,name)
+);
+
+create table best_choice
+(
+rollno number(10) references student_academics(rollno) on delete cascade,
+name varchar2(50) references company(name) on delete cascade,
+primary key (rollno,name)
+);
+
+create table eligible
+(
+rollno number(10) references student_academics(rollno) on delete cascade,
+name varchar2(50) references company(name) on delete cascade,
+primary key (rollno,name)
+);
+
+create table contact
+(
+rollno number(10) references student_academics(rollno) on delete cascade,
+almunino number(15) references college_alumini(almunino) on delete cascade,
+primary key (rollno,almunino)
+);
+
+create table student_academics_ability
+(
+rollno number(10) references student_academics(rollno) on delete cascade,
+ability varchar2(200),
+primary key (rollno,ability)
+);
+
+create table student_academics_achievement
+(
+rollno number(10) references student_academics(rollno) on delete cascade,
+achievement varchar2(200),
+primary key (rollno,achievement)
+);
+
+create table student_academics_projectwork
+(
+rollno number(10) references student_academics(rollno) on delete cascade,
+projectwork varchar2(200),
+primary key (rollno,projectwork)
+);
+
+create table student_cocurricular
+(
+rollno number(10) references student_academics(rollno) on delete cascade,
+cocurricular_activities varchar2(200),
+primary key (rollno,cocurricular_activities)
+);
+
+create table alumini_contact
+(
+almunino number(15) references college_alumini(almunino) on delete cascade,
+mobile_no varchar2 (15),
+primary key (almunino,mobile_no)
+);
+
+create table company_branch_specification
+(
+name varchar2(50) references company(name) on delete cascade,
+branch_spec varchar2(10),
+primary key (name,branch_spec)
+);
+
+create table company_small_package
+(
+name varchar2(50) references company(name) on delete cascade,
+company_type varchar2(100),
+primary key (name,company_type)
+);
+
+create table company_medium_package
+(
+name varchar2(50) references company(name) on delete cascade,
+cgpa_cut number(4,2),
+package number(15),
+primary key (name)
+);
+
+create table company_dream_package
+(
+name varchar2(50) references company(name) on delete cascade,
+cgpa_cut number(4,2),
+facility varchar2(15),
+primary key (name)
+);
+
+create table placed
+(
+rollno number(10) references student(rollno) on delete cascade,
+name varchar2(50) references company(name) on delete cascade,
+primary key (rollno,name)
+);
+

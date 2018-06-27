@@ -1,0 +1,14 @@
+create or replace procedure company_specialisation (nm in varchar2,checkt in number,ct in varchar2,cg in number,fc in varchar2) is
+begin
+if checkt=1  then 
+	insert into company_small_package(name,company_type) values (nm,ct);  
+elsif checkt = 2 then
+	insert into company_medium_package(name,cgpa_cut) values (nm,cg);
+elsif checkt = 3 then
+	insert into company_dream_package(name,cgpa_cut,facility) values (nm,cg,fc);
+else
+	dbms_output.put_line('wrong input');
+end if;
+end;
+
+

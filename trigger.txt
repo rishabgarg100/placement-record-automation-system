@@ -1,0 +1,32 @@
+declare
+rno apply.rollno%type := &rollno;
+name apply.name%type := '&name';
+begin
+insert into apply values (rno,name);
+end;
+
+CREATE OR REPLACE TRIGGER ELIGIBLE_TRIG
+AFTER INSERT OR UPDATE ON APPLY
+FOR EACH ROW
+DECLARE
+cgs student_academics.cgpa%type;
+cgc company_dream_package.cgpa_cut%type;
+BEGIN
+   select cgpa into cgs from student_academics where rollno=:new.rollno;
+   select cgpa_cut into cgc from company_dream_package where name=:new.name;
+   if cgs>=cgc then
+      insert into eligible values(:new.rollno,:new.name);
+   end if;
+END;
+
+
+
+
+
+
+
+
+
+
+
+
