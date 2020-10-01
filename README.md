@@ -1,5 +1,6 @@
 # placement-record-automation-system
 This is my dbms sql project.
+I have created in 2nd yesr
 
 
 It is for the Center for Industrial Liasion & Placement (CILP), Thapar university which organizes placement for final year students.
